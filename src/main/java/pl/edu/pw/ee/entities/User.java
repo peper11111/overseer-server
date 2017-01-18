@@ -18,7 +18,6 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @NotNull
     private boolean active;
 
     @NotNull
@@ -29,13 +28,18 @@ public class User implements Serializable {
     @JsonIgnore
     private String password;
 
-    @Column(unique = true)
     private String token;
 
+    @NotNull
     @OneToOne
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
     private Details details;
+
+    @ManyToOne
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
+    private User supervisor;
 
     public long getId() {
         return id;
@@ -83,5 +87,13 @@ public class User implements Serializable {
 
     public void setDetails(Details details) {
         this.details = details;
+    }
+
+    public User getSupervisor() {
+        return supervisor;
+    }
+
+    public void setSupervisor(User supervisor) {
+        this.supervisor = supervisor;
     }
 }

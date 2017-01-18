@@ -34,11 +34,6 @@ public class Details implements Serializable {
     @ManyToOne
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
-    private User supervisor;
-
-    @OneToOne
-    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-    @JsonIdentityReference(alwaysAsId = true)
     private Avatar avatar;
 
     public long getId() {
@@ -103,14 +98,6 @@ public class Details implements Serializable {
 
     public void setCompany(String company) {
         this.company = company;
-    }
-
-    public User getSupervisor() {
-        return supervisor;
-    }
-
-    public void setSupervisor(User supervisor) {
-        this.supervisor = supervisor;
     }
 
     public Avatar getAvatar() {
