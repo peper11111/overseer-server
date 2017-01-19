@@ -3,10 +3,7 @@ package pl.edu.pw.ee.controllers;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.edu.pw.ee.entities.Avatar;
 import pl.edu.pw.ee.repositories.AvatarRepository;
 import pl.edu.pw.ee.services.IndexService;
@@ -24,6 +21,21 @@ public class IndexController {
         return indexService.authenticate(new JSONObject(request));
     }
 
+    @RequestMapping(value = "/profile", method = RequestMethod.POST)
+    public ResponseEntity profile(@RequestBody String request) {
+        return indexService.profile(new JSONObject(request));
+    }
+
+    @RequestMapping(value = "/password", method = RequestMethod.POST)
+    public ResponseEntity password(@RequestBody String request) {
+        return indexService.password(new JSONObject(request));
+    }
+
+    @RequestMapping(value = "/subordinates", method = RequestMethod.POST)
+    public ResponseEntity subordinates(@RequestBody String request) {
+        return indexService.subordinates(new JSONObject(request));
+    }
+
     @RequestMapping(value = "/start", method = RequestMethod.POST)
     public ResponseEntity start(@RequestBody String request) {
         return indexService.start(new JSONObject(request));
@@ -33,6 +45,10 @@ public class IndexController {
     public ResponseEntity stop(@RequestBody String request) {
         return indexService.stop(new JSONObject(request));
     }
+
+
+
+
 
     @RequestMapping(value = "/statistics", method = RequestMethod.POST)
     public ResponseEntity statistics(@RequestBody String request) {
@@ -47,16 +63,15 @@ public class IndexController {
     @Autowired
     private AvatarRepository avatarRepository;
 
-    @RequestMapping(value = "/avatar", method = RequestMethod.GET)
-    public void avatar() {
-        File file = new File("/home/peper11111/Pulpit/avatar.png");
+    @RequestMapping(value = "/avatar/{name}", method = RequestMethod.GET)
+    public void avatar(@PathVariable String name) {
+        File file = new File("/home/peper11111/Pulpit/" + name + ".png");
         byte[] image = new byte[(int) file.length()];
 
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
             fileInputStream.read(image);
             fileInputStream.close();
-            System.out.println(image.length);
 
             Avatar avatar = new Avatar();
             avatar.setImage(image);

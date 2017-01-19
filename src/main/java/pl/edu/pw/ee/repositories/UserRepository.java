@@ -16,4 +16,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     @Query("SELECT u FROM User u WHERE u.token = :token")
     User findByToken(@Param("token") String token);
+
+    @Query("SELECT u FROM User u WHERE u.supervisor = :id")
+    Iterable<User> findBySupervisor(@Param("id") Long id);
 }

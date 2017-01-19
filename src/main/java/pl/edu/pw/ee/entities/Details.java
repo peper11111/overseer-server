@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
@@ -16,12 +17,33 @@ public class Details implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private String name;
+    @ManyToOne
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
+    private Avatar avatar;
+
+    @NotNull
+    private String firstName;
+
+    private String middleName;
+
+    @NotNull
+    private String lastName;
 
     @Column(unique = true)
     private String email;
 
+    private String phone;
+
     private String mobile;
+
+    private String address;
+
+    private String zip;
+
+    private String city;
+
+    private long joined;
 
     private String rank;
 
@@ -31,11 +53,6 @@ public class Details implements Serializable {
 
     private String company;
 
-    @ManyToOne
-    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-    @JsonIdentityReference(alwaysAsId = true)
-    private Avatar avatar;
-
     public long getId() {
         return id;
     }
@@ -44,12 +61,36 @@ public class Details implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Avatar getAvatar() {
+        return avatar;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAvatar(Avatar avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -60,12 +101,52 @@ public class Details implements Serializable {
         this.email = email;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String getMobile() {
         return mobile;
     }
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public long getJoined() {
+        return joined;
+    }
+
+    public void setJoined(long joined) {
+        this.joined = joined;
     }
 
     public String getRank() {
@@ -98,13 +179,5 @@ public class Details implements Serializable {
 
     public void setCompany(String company) {
         this.company = company;
-    }
-
-    public Avatar getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(Avatar avatar) {
-        this.avatar = avatar;
     }
 }

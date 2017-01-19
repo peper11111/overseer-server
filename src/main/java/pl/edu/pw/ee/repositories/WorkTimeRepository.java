@@ -13,7 +13,7 @@ import javax.transaction.Transactional;
 @Transactional
 public interface WorkTimeRepository extends CrudRepository<WorkTime, Long> {
     @Query("SELECT w FROM WorkTime w WHERE w.stop IS NULL AND w.user = :user")
-    WorkTime findByUser(@Param("user") User user);
+    Iterable<WorkTime> findByUser(@Param("user") User user);
 
     @Query("SELECT w FROM WorkTime w WHERE w.start >= :start AND w.stop <= :stop AND w.user = :user")
     Iterable<WorkTime> findByInterval(@Param("start") Long start, @Param("stop") Long stop, @Param("user") User user);

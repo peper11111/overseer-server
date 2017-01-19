@@ -1,6 +1,3 @@
-# INSERT INTO details VALUES (1, 'Atende Software', 'Dział Rozwoju Smart Grid', 'peper.pleban@atendesoftware.pl', '980 912 321', 'Piotr Pleban', 'Tester', 'Zespół wdrożeń', NULL);
-# INSERT INTO user VALUES (1, 1, '$2a$04$cT4SUBwgGlHCOdNYl5qIxuWxliAiwj9Ovtdo6eYZ9j9vZuiXzJQ8u', NULL, 'piotr.pleban', 1, NULL);
-#
 # INSERT INTO work_time VALUES (1, 1483225200000, 1483225200000, 0, 1);
 # INSERT INTO work_time VALUES (2, 1483311600000, 1483336800000, 25200000, 1);
 # INSERT INTO work_time VALUES (3, 1483398000000, 1483426800000, 28800000, 1);
@@ -32,3 +29,12 @@
 # INSERT INTO work_time VALUES (29, 1485648000000, 1485648000001, 1, 1);
 # INSERT INTO work_time VALUES (30, 1485734400000, 1485734400001, 1, 1);
 # INSERT INTO work_time VALUES (31, 1485820800000, 1485820800001, 1, 1);
+
+# INSERT INTO details VALUES (1, 'ul. Sienkiewicza 85', 'Daleszyce', 'Atende Software', 'Dział Rozwoju Smart Grid', 'piotr.pleban@atendesoftware.pl', 'Piotr', 1471125600000, 'Pleban', 'Emil', '980 912 321', '(22) 234 12 32', 'Tester', 'Zespół wdrożeń', '26-021', 2);
+# INSERT INTO user VALUES (1, 1, '$2a$04$cT4SUBwgGlHCOdNYl5qIxuWxliAiwj9Ovtdo6eYZ9j9vZuiXzJQ8u', NULL, 'piotr.pleban', 1, NULL);
+#
+# INSERT INTO details VALUES (2, 'ul. Wrzecionowa 123', 'Warszawa', 'Atende Software', 'Zarząd', 'karolina.laksy@atendesoftware.pl', 'Karolina', 1471125600000, 'Laksy', 'Klara', '980 912 321', '(22) 234 12 32', 'Prezes', '-', '03-123', 1);
+# INSERT INTO user VALUES (2, 1, '$2a$04$cT4SUBwgGlHCOdNYl5qIxuWxliAiwj9Ovtdo6eYZ9j9vZuiXzJQ8u', NULL, 'karolina.laksy', 2, 1);
+#
+# INSERT INTO details VALUES (3, 'ul. Lipna 12', 'Kraków', 'Atende Software', 'Zarząd', 'maciej.pleban@atendesoftware.pl', 'Maciej', 1471125600000, 'Pleban', NULL, '980 912 321', '(22) 234 12 32', 'Zastępca Prezesa', '-', '26-123', 1);
+# INSERT INTO user VALUES (3, 1, '$2a$04$cT4SUBwgGlHCOdNYl5qIxuWxliAiwj9Ovtdo6eYZ9j9vZuiXzJQ8u', NULL, 'maciej.pleban', 3, 1);
