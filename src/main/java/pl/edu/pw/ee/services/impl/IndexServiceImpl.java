@@ -125,16 +125,49 @@ public class IndexServiceImpl implements IndexService {
         }
 
         Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+
         Date now = calendar.getTime();
 
+        JSONObject week = new JSONObject();
+        for (int i = calendar.getActualMinimum(Calendar.DAY_OF_WEEK); i <= calendar.getActualMaximum(Calendar.DAY_OF_WEEK); i++) {
+            calendar.set(Calendar.DAY_OF_WEEK, i);
+            Date start = calendar.getTime();
+
+            Date stop = new Date(start.getTime() + 86400000);
+
+            long summary = 0;
+            for (WorkTime workTime : workTimeRepository.findByInterval(start.getTime(), stop.getTime(), user))
+                summary += workTime.getSummary();
+            week.put("" + (i == 1 ? 7 : i - 1), summary);
+        }
+        response.put("week", week);
+
+        calendar.setTime(now);
+
+        JSONObject month = new JSONObject();
+        for (int i = calendar.getActualMinimum(Calendar.DATE); i <= calendar.getActualMaximum(Calendar.DATE); i++) {
+            calendar.set(Calendar.DATE, i);
+            Date start = calendar.getTime();
+
+            Date stop = new Date(start.getTime() + 86400000);
+
+            long summary = 0;
+            for (WorkTime workTime : workTimeRepository.findByInterval(start.getTime(), stop.getTime(), user))
+                summary += workTime.getSummary();
+            month.put("" + i, summary);
+        }
+        response.put("month", month);
+
+        calendar.setTime(now);
+        calendar.set(Calendar.DATE, 1);
+
         JSONObject year = new JSONObject();
-        for (int i = 0; i <= 11; i++) {
+        for (int i = calendar.getActualMinimum(Calendar.MONTH); i <= calendar.getActualMaximum(Calendar.MONTH); i++) {
             calendar.set(Calendar.MONTH, i);
-            calendar.set(Calendar.DATE, 1);
-            calendar.set(Calendar.HOUR_OF_DAY, 0);
-            calendar.set(Calendar.MINUTE, 0);
-            calendar.set(Calendar.SECOND, 0);
-            calendar.set(Calendar.MILLISECOND, 0);
             Date start = calendar.getTime();
 
             calendar.set(Calendar.MONTH, i + 1);
@@ -147,16 +180,50 @@ public class IndexServiceImpl implements IndexService {
         }
         response.put("year", year);
 
+        return ResponseEntity.status(HttpStatus.OK).body(response.toString());
+    }
+
+    @Override
+    public ResponseEntity history(JSONObject request) {
+        JSONObject response = new JSONObject();
+
+        User user = userRepository.findByToken(request.getString("token"));
+        if (user == null) {
+            response.put("error", "ERROR_USER_TOKEN");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response.toString());
+        }
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+
+        Date now = calendar.getTime();
+        calendar.set(Calendar.WEEK_OF_MONTH, calendar.get(Calendar.WEEK_OF_MONTH) - 1);
+
+        JSONObject week = new JSONObject();
+        for (int i = calendar.getActualMinimum(Calendar.DAY_OF_WEEK); i <= calendar.getActualMaximum(Calendar.DAY_OF_WEEK); i++) {
+            calendar.set(Calendar.DAY_OF_WEEK, i);
+            Date start = calendar.getTime();
+
+            Date stop = new Date(start.getTime() + 86400000);
+
+            long summary = 0;
+            for (WorkTime workTime : workTimeRepository.findByInterval(start.getTime(), stop.getTime(), user))
+                summary += workTime.getSummary();
+            week.put("" + (i == 1 ? 7 : i - 1), summary);
+        }
+        response.put("week", week);
+
         calendar.setTime(now);
+        calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 1);
 
         JSONObject month = new JSONObject();
-        for (int i = 1; i <= calendar.getActualMaximum(Calendar.DATE); i++) {
+        for (int i = calendar.getActualMinimum(Calendar.DATE); i <= calendar.getActualMaximum(Calendar.DATE); i++) {
             calendar.set(Calendar.DATE, i);
-            calendar.set(Calendar.HOUR_OF_DAY, 0);
-            calendar.set(Calendar.MINUTE, 0);
-            calendar.set(Calendar.SECOND, 0);
-            calendar.set(Calendar.MILLISECOND, 0);
             Date start = calendar.getTime();
+
             Date stop = new Date(start.getTime() + 86400000);
 
             long summary = 0;
@@ -167,23 +234,23 @@ public class IndexServiceImpl implements IndexService {
         response.put("month", month);
 
         calendar.setTime(now);
+        calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR) - 1);
+        calendar.set(Calendar.DATE, 1);
 
-        JSONObject week = new JSONObject();
-        for (int i = 1; i <= 7; i++) {
-            calendar.set(Calendar.DAY_OF_WEEK, i);
-            calendar.set(Calendar.HOUR_OF_DAY, 0);
-            calendar.set(Calendar.MINUTE, 0);
-            calendar.set(Calendar.SECOND, 0);
-            calendar.set(Calendar.MILLISECOND, 0);
+        JSONObject year = new JSONObject();
+        for (int i = calendar.getActualMinimum(Calendar.MONTH); i <= calendar.getActualMaximum(Calendar.MONTH); i++) {
+            calendar.set(Calendar.MONTH, i);
             Date start = calendar.getTime();
-            Date stop = new Date(start.getTime() + 86400000);
+
+            calendar.set(Calendar.MONTH, i + 1);
+            Date stop = calendar.getTime();
 
             long summary = 0;
             for (WorkTime workTime : workTimeRepository.findByInterval(start.getTime(), stop.getTime(), user))
                 summary += workTime.getSummary();
-            week.put("" + (i == 1 ? 7 : i - 1), summary);
+            year.put("" + (i + 1), summary);
         }
-        response.put("week", week);
+        response.put("year", year);
 
         return ResponseEntity.status(HttpStatus.OK).body(response.toString());
     }

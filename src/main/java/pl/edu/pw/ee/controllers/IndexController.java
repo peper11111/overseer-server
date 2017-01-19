@@ -39,6 +39,11 @@ public class IndexController {
         return indexService.statistics(new JSONObject(request));
     }
 
+    @RequestMapping(value = "/history", method = RequestMethod.POST)
+    public ResponseEntity history(@RequestBody String request) {
+        return indexService.history(new JSONObject(request));
+    }
+
     @Autowired
     private AvatarRepository avatarRepository;
 
