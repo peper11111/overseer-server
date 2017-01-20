@@ -26,11 +26,6 @@ public class IndexController {
         return indexService.profile(new JSONObject(request));
     }
 
-    @RequestMapping(value = "/password", method = RequestMethod.POST)
-    public ResponseEntity password(@RequestBody String request) {
-        return indexService.password(new JSONObject(request));
-    }
-
     @RequestMapping(value = "/subordinates", method = RequestMethod.POST)
     public ResponseEntity subordinates(@RequestBody String request) {
         return indexService.subordinates(new JSONObject(request));

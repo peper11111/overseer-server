@@ -99,24 +99,6 @@ public class IndexServiceImpl implements IndexService {
     }
 
     @Override
-    public ResponseEntity password(JSONObject request) {
-        JSONObject response = new JSONObject();
-
-        User user = userRepository.findByToken(request.getString("token"));
-        if (user == null || !user.isActive()) {
-            response.put("error", "AUTHENTICATION_ERROR");
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response.toString());
-        }
-
-        user.setPassword(new BCryptPasswordEncoder().encode(request.getString("password")));
-        userRepository.save(user);
-
-        response.put("success", "SUCCESS_OK");
-
-        return ResponseEntity.status(HttpStatus.OK).body(response.toString());
-    }
-
-    @Override
     public ResponseEntity subordinates(JSONObject request) {
         JSONObject response = new JSONObject();
 

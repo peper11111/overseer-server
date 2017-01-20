@@ -8,8 +8,6 @@ public interface IndexService {
 
     ResponseEntity profile(JSONObject request);
 
-    ResponseEntity password(JSONObject request);
-
     ResponseEntity subordinates(JSONObject request);
 
     ResponseEntity details(JSONObject request);
