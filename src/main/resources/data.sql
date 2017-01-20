@@ -30,11 +30,32 @@
 # INSERT INTO work_time VALUES (83, 1485734400000, 1485734400001, 1, 1);
 # INSERT INTO work_time VALUES (84, 1485820800000, 1485820800001, 1, 1);
 
-# INSERT INTO details VALUES (1, 'ul. Sienkiewicza 85', 'Daleszyce', 'Atende Software', 'Dział Rozwoju Smart Grid', 'piotr.pleban@atendesoftware.pl', 'Piotr', 1471125600000, 'Pleban', 'Emil', '980 912 321', '(22) 234 12 32', 'Tester', 'Zespół wdrożeń', '26-021', 2);
-# INSERT INTO user VALUES (1, 1, '$2a$04$cT4SUBwgGlHCOdNYl5qIxuWxliAiwj9Ovtdo6eYZ9j9vZuiXzJQ8u', NULL, 'piotr.pleban', 1, NULL);
+# INSERT INTO details VALUES (1, 'ul. Złota 1', 'Warszawa', 'Overseer Company', 'Zarząd', 'karolina.laksy@overseer.pl', 'Karolina', 1483225200000, 'Laksy', 'Klara', '(+48) 999 999 999', '(22) 999 99 99', 'Prezes', '-', '00-000', 3);
+# INSERT INTO user VALUES (1, 1, '$2a$04$/cnLJkRJ378IDvZFByiL.e/aDAY5Bl1VpWWKZm9pZbTBdjoT7tFeK', NULL, 'karolina.laksy', 1, NULL);
 #
-# INSERT INTO details VALUES (2, 'ul. Wrzecionowa 123', 'Warszawa', 'Atende Software', 'Zarząd', 'karolina.laksy@atendesoftware.pl', 'Karolina', 1471125600000, 'Laksy', 'Klara', '980 912 321', '(22) 234 12 32', 'Prezes', '-', '03-123', 1);
-# INSERT INTO user VALUES (2, 1, '$2a$04$cT4SUBwgGlHCOdNYl5qIxuWxliAiwj9Ovtdo6eYZ9j9vZuiXzJQ8u', NULL, 'karolina.laksy', 2, 1);
+# INSERT INTO details VALUES (2, 'ul. Złota 1', 'Warszawa', 'Overseer Company', 'Zarząd', 'piotr.pleban@overseer.pl', 'Piotr', 1483225200000, 'Pleban', 'Emil', '(+48) 999 999 999', '(22) 999 99 99', 'Administrator', '-', '00-000', 2);
+# INSERT INTO user VALUES (2, 1, '$2a$04$sxfwTinbL8dI1mOgmiBpdetxqE5MLp.UTAXEtv3fH75gwMRoFQh2S', NULL, 'piotr.pleban', 2, 1);
 #
-# INSERT INTO details VALUES (3, 'ul. Lipna 12', 'Kraków', 'Atende Software', 'Zarząd', 'maciej.pleban@atendesoftware.pl', 'Maciej', 1471125600000, 'Pleban', NULL, '980 912 321', '(22) 234 12 32', 'Zastępca Prezesa', '-', '26-123', 1);
-# INSERT INTO user VALUES (3, 1, '$2a$04$cT4SUBwgGlHCOdNYl5qIxuWxliAiwj9Ovtdo6eYZ9j9vZuiXzJQ8u', NULL, 'maciej.pleban', 3, 1);
+# INSERT INTO details VALUES (3, 'ul. Złota 1', 'Warszawa', 'Overseer Company', 'Zarząd', 'maciej.pleban@overseer.pl', 'Maciej', 1483225200000, 'Pleban', NULL, '(+48) 999 999 999', '(22) 999 99 99', 'Kierownik działu', '-', '00-000', 1);
+# INSERT INTO user VALUES (3, 1, '$2a$04$V1XuK6QHDpJZKHrF48nHD.4sXXeUnd6WlCRDyEL.D7pTyQJjytBYu', NULL, 'maciej.pleban', 3, 2);
+#
+# INSERT INTO details VALUES (4, 'ul. Złota 1', 'Warszawa', 'Overseer Company', 'Dział Rozwoju', 'ryszard.maslik@overseer.pl', 'Ryszard', 1483225200000, 'Maślik', 'Tomasz', '(+48) 999 999 999', '(22) 999 99 99', 'Kierownik zespołu', '-', '00-000', 1);
+# INSERT INTO user VALUES (4, 1, '$2a$04$j1.Pikb9S282NidXpCRLwOHTF0OP5FHymiLuCVWhnqOgXV.Bd856G', NULL, 'ryszard.maslik', 4, 3);
+#
+# INSERT INTO details VALUES (5, 'ul. Złota 1', 'Warszawa', 'Overseer Company', 'Dział Technologii', 'anna.grela@overseer.pl', 'Anna', 1483225200000, 'Grela', NULL, '(+48) 999 999 999', '(22) 999 99 99', 'Kierownik zespołu', '-', '00-000', 1);
+# INSERT INTO user VALUES (5, 1, '$2a$04$QUlE9aj2GiictD6I8QQ/YOk9nmrLkEnrmJ2m23dpOrrbz8AU2kKlm', NULL, 'anna.grela', 5, 3);
+#
+# INSERT INTO details VALUES (6, 'ul. Złota 1', 'Warszawa', 'Overseer Company', 'Dział Rozwoju', 'filip.lomianek@overseer.pl', 'Filip', 1483225200000, 'Łomianek', NULL, '(+48) 999 999 999', '(22) 999 99 99', 'Programista', '-', '00-000', 1);
+# INSERT INTO user VALUES (6, 1, '$2a$04$SO5LQOt3/hq3CTdIqobbIOYa46Nnm3dK8rQHr9ytmpQgMPi8zE8jm', NULL, 'filip.lomianek', 6, 4);
+#
+# INSERT INTO details VALUES (7, 'ul. Złota 1', 'Warszawa', 'Overseer Company', 'Dział Technologii', 'tomasz.buc@overseer.pl', 'Tomasz', 1483225200000, 'Buc', NULL, '(+48) 999 999 999', '(22) 999 99 99', 'Programista', '-', '00-000', 1);
+# INSERT INTO user VALUES (7, 1, '$2a$04$Iuofz7NJm3rIPTllMVlvxOAvMcaZaVP5cKmxu0O9w1nEJQoKrNhTa', NULL, 'tomasz.buc', 7, 5);
+#
+# INSERT INTO details VALUES (8, 'ul. Złota 1', 'Warszawa', 'Overseer Company', 'Dział Technologii', 'karol.krasny@overseer.pl', 'Karol', 1483225200000, 'Krasny', NULL, '(+48) 999 999 999', '(22) 999 99 99', 'Tester', '-', '00-000', 1);
+# INSERT INTO user VALUES (8, 1, '$2a$04$0ppLpajyAKTts1m/H6vYQ.shhcv6K1gNJLuY8GIvcGGLHkRrAytZ6', NULL, 'karol.krasny', 8, 5);
+#
+# INSERT INTO details VALUES (9, 'ul. Złota 1', 'Warszawa', 'Overseer Company', 'Dział Rozwoju', 'sylwester.stuc@overseer.pl', 'Sylwester', 1483225200000, 'Stuc', 'Marek', '(+48) 999 999 999', '(22) 999 99 99', 'Programista', '-', '00-000', 1);
+# INSERT INTO user VALUES (9, 1, '$2a$04$DkwQ92jK1FtZ0NJyAP8bgulLpT9Lx5Kw8uXIFUrvAZYnu6IE97zvi', NULL, 'sylwester.stuc', 9, 4);
+#
+# INSERT INTO details VALUES (10, 'ul. Złota 1', 'Warszawa', 'Overseer Company', 'Dział Rozwoju', 'magdalena.iwo@overseer.pl', 'Magdalena', 1483225200000, 'Iwo', NULL, '(+48) 999 999 999', '(22) 999 99 99', 'Analityk', '-', '00-000', 1);
+# INSERT INTO user VALUES (10, 1, '$2a$04$6r1ECaVoTbvQoVaO6f2guOa2qBzOji.TnhTBGP2ytNb6LqpjhrPam', NULL, 'magdalena.iwo', 10, 4);

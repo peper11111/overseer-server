@@ -271,38 +271,40 @@ public class IndexServiceImpl implements IndexService {
 
         Calendar calendar = Calendar.getInstance();
 
-        for (WorkTime workTime : workTimeRepository.findByUser(user)) {
-            long start = workTime.getStart();
-            long stop = request.getLong("stop");
+        Iterator<WorkTime> iterator = workTimeRepository.findByUser(user).iterator();
+        WorkTime workTime = null;
+        while (iterator.hasNext())
+            workTime = iterator.next();
 
-            calendar.setTimeInMillis(stop);
-            int stopDay = calendar.get(Calendar.DATE);
-            calendar.setTimeInMillis(start);
-            int startDay = calendar.get(Calendar.DATE);
+        long start = workTime.getStart();
+        long stop = request.getLong("stop");
 
-            if (startDay == stopDay) {
-                workTime.setStop(stop);
-                workTime.setSummary(stop - start);
-                workTimeRepository.save(workTime);
-            } else {
-                calendar.set(Calendar.HOUR_OF_DAY, 0);
-                calendar.set(Calendar.MINUTE, 0);
-                calendar.set(Calendar.SECOND, 0);
-                calendar.set(Calendar.MILLISECOND, 0);
-                calendar.add(Calendar.DATE, 1);
-                long tmpStop = calendar.getTime().getTime();
-                workTime.setStop(tmpStop);
-                workTime.setSummary(tmpStop - start);
-                workTimeRepository.save(workTime);
+        calendar.setTimeInMillis(stop);
+        int stopDay = calendar.get(Calendar.DATE);
+        calendar.setTimeInMillis(start);
+        int startDay = calendar.get(Calendar.DATE);
 
-                WorkTime newWorkTime = new WorkTime();
-                newWorkTime.setStart(tmpStop);
-                newWorkTime.setStop(stop);
-                newWorkTime.setSummary(stop - tmpStop);
-                newWorkTime.setUser(workTime.getUser());
-                workTimeRepository.save(newWorkTime);
-            }
-            break;
+        if (startDay == stopDay) {
+            workTime.setStop(stop);
+            workTime.setSummary(stop - start);
+            workTimeRepository.save(workTime);
+        } else {
+            calendar.set(Calendar.HOUR_OF_DAY, 0);
+            calendar.set(Calendar.MINUTE, 0);
+            calendar.set(Calendar.SECOND, 0);
+            calendar.set(Calendar.MILLISECOND, 0);
+            calendar.add(Calendar.DATE, 1);
+            long tmpStop = calendar.getTime().getTime();
+            workTime.setStop(tmpStop);
+            workTime.setSummary(tmpStop - start);
+            workTimeRepository.save(workTime);
+
+            WorkTime newWorkTime = new WorkTime();
+            newWorkTime.setStart(tmpStop);
+            newWorkTime.setStop(stop);
+            newWorkTime.setSummary(stop - tmpStop);
+            newWorkTime.setUser(workTime.getUser());
+            workTimeRepository.save(newWorkTime);
         }
 
         response.put("success", "SUCCESS_OK");
