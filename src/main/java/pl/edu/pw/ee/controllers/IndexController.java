@@ -36,6 +36,11 @@ public class IndexController {
         return indexService.subordinates(new JSONObject(request));
     }
 
+    @RequestMapping(value = "/location", method = RequestMethod.POST)
+    public ResponseEntity location(@RequestBody String request) {
+        return indexService.location(new JSONObject(request));
+    }
+
     @RequestMapping(value = "/start", method = RequestMethod.POST)
     public ResponseEntity start(@RequestBody String request) {
         return indexService.start(new JSONObject(request));
@@ -46,18 +51,9 @@ public class IndexController {
         return indexService.stop(new JSONObject(request));
     }
 
-
-
-
-
     @RequestMapping(value = "/statistics", method = RequestMethod.POST)
     public ResponseEntity statistics(@RequestBody String request) {
         return indexService.statistics(new JSONObject(request));
-    }
-
-    @RequestMapping(value = "/history", method = RequestMethod.POST)
-    public ResponseEntity history(@RequestBody String request) {
-        return indexService.history(new JSONObject(request));
     }
 
     @Autowired

@@ -19,8 +19,4 @@ public interface IndexService {
     ResponseEntity stop(JSONObject request);
 
     ResponseEntity statistics(JSONObject request);
-
-    ResponseEntity history(JSONObject request);
-
-
 }
