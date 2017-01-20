@@ -36,6 +36,11 @@ public class IndexController {
         return indexService.subordinates(new JSONObject(request));
     }
 
+    @RequestMapping(value = "/details", method = RequestMethod.POST)
+    public ResponseEntity details(@RequestBody String request) {
+        return indexService.details(new JSONObject(request));
+    }
+
     @RequestMapping(value = "/location", method = RequestMethod.POST)
     public ResponseEntity location(@RequestBody String request) {
         return indexService.location(new JSONObject(request));

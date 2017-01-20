@@ -150,6 +150,67 @@ public class IndexServiceImpl implements IndexService {
     }
 
     @Override
+    public ResponseEntity details(JSONObject request) {
+        JSONObject response = new JSONObject();
+
+        User user = userRepository.findByToken(request.getString("token"));
+        if (user == null || !user.isActive()) {
+            response.put("error", "AUTHENTICATION_ERROR");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response.toString());
+        }
+
+        JSONObject profile = new JSONObject();
+        User subordinate = userRepository.findOne(request.getLong("id"));
+        Details details = subordinate.getDetails();
+        profile.put("phone", details.getPhone());
+        profile.put("mobile", details.getMobile());
+        profile.put("address", details.getAddress());
+        profile.put("zip", details.getZip());
+        profile.put("city", details.getCity());
+        profile.put("joined", new SimpleDateFormat("yyyy-MM-dd").format(new Date(details.getJoined())));
+        profile.put("rank", details.getRank());
+        profile.put("team", details.getTeam());
+        profile.put("department", details.getDepartment());
+        profile.put("company", details.getCompany());
+        if (subordinate.getSupervisor() != null)
+            profile.put("supervisor", getName(subordinate.getSupervisor().getDetails()));
+        else
+            profile.put("supervisor", "-");
+
+        response.put("profile", profile);
+
+
+        JSONObject current = new JSONObject();
+        JSONObject previous = new JSONObject();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+
+        Date now = calendar.getTime();
+
+        JSONObject currentMonth = new JSONObject();
+        getMonth(calendar, currentMonth, subordinate);
+        current.put("month", currentMonth);
+
+        calendar.setTime(now);
+        calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 1);
+        JSONObject previousMonth = new JSONObject();
+        getMonth(calendar, previousMonth, subordinate);
+        previous.put("month", previousMonth);
+
+        JSONObject workTime = new JSONObject();
+        workTime.put("current", current);
+        workTime.put("previous", previous);
+
+        response.put("worktime", workTime);
+
+        return ResponseEntity.status(HttpStatus.OK).body(response.toString());
+    }
+
+    @Override
     public ResponseEntity location(JSONObject request) {
         JSONObject response = new JSONObject();
 

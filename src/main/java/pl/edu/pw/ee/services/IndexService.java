@@ -12,6 +12,8 @@ public interface IndexService {
 
     ResponseEntity subordinates(JSONObject request);
 
+    ResponseEntity details(JSONObject request);
+
     ResponseEntity location(JSONObject request);
 
     ResponseEntity start(JSONObject request);
