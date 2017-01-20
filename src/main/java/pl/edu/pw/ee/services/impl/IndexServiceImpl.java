@@ -207,6 +207,30 @@ public class IndexServiceImpl implements IndexService {
 
         response.put("worktime", workTime);
 
+        ArrayList locations = new ArrayList();
+        for (Location location : locationRepository.findByUser(subordinate)) {
+            JSONObject loc = new JSONObject();
+            loc.put("date", location.getDate());
+            loc.put("latitude", location.getLatitude());
+            loc.put("longitude", location.getLongitude());
+            locations.add(loc);
+        }
+
+        Collections.sort(locations, new Comparator() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                long d1 = ((JSONObject) o1).getLong("date");
+                long d2 = ((JSONObject) o2).getLong("date");
+                if (d1 < d2)
+                    return 1;
+                if (d1 > d2)
+                    return -1;
+                return 0;
+            }
+        });
+
+        response.put("locations", locations);
+
         return ResponseEntity.status(HttpStatus.OK).body(response.toString());
     }
 
